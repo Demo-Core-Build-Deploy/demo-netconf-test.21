@@ -24,7 +24,7 @@ jobs:
     
     env:
       GITHUB_USERNAME: ${{ github.actor }}
-      GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
     - uses: actions/checkout@v4
@@ -38,12 +38,12 @@ jobs:
       run: mvn -s ${GITHUB_WORKSPACE}/settings.xml -B validate --file pom.xml 
 
     - name: Debug Environment Variable
-      run:  echo "GIT_TOKEN:${{ secrets.GIT_TOKEN }}"
+      run:  echo "GITHUB_TOKEN:${{ secrets.GITHUB_TOKEN }}"
 
     - name: 🚀 Deploy to GitHub Packages
       run: |
-         export GIT_TOKEN=${{ secrets.GIT_TOKEN }}
-         mvn -s ${GITHUB_WORKSPACE}/settings.xml --batch-mode deploy -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/Be-with-DevOps/demo-netconf-test.2 -DskipTests=true
+         export GIT_TOKEN=${{ secrets.GITHUB_TOKEN }}
+         mvn -s ${GITHUB_WORKSPACE}/settings.xml --batch-mode deploy -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/Demo-Core-Build-Deploy/demo-netconf-test.21 -DskipTests=true
       env:
-        GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
-        GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
